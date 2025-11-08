@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Speakers;
 use App\Filament\Resources\Speakers\Pages\CreateSpeaker;
 use App\Filament\Resources\Speakers\Pages\EditSpeaker;
 use App\Filament\Resources\Speakers\Pages\ListSpeakers;
+use App\Filament\Resources\Speakers\RelationManagers\TalksRelationManager;
 use App\Filament\Resources\Speakers\Schemas\SpeakerForm;
 use App\Filament\Resources\Speakers\Tables\SpeakersTable;
 use App\Models\Speaker;
@@ -35,7 +36,7 @@ class SpeakerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TalksRelationManager::class,
         ];
     }
 
@@ -43,8 +44,9 @@ class SpeakerResource extends Resource
     {
         return [
             'index' => ListSpeakers::route('/'),
-            'create' => CreateSpeaker::route('/create'),
-            'edit' => EditSpeaker::route('/{record}/edit'),
+            'view' => EditSpeaker::route('/{record}'),
+//            'create' => CreateSpeaker::route('/create'),
+//            'edit' => EditSpeaker::route('/{record}/edit'),
         ];
     }
 }
