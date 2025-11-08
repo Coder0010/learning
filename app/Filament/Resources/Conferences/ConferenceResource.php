@@ -43,8 +43,8 @@ class ConferenceResource extends Resource
     {
         return [
             'index' => ListConferences::route('/'),
-            'create' => CreateConference::route('/create'),
-            'edit' => EditConference::route('/{record}/edit'),
+//            'create' => CreateConference::route('/create'),
+//            'edit' => EditConference::route('/{record}/edit'),
         ];
     }
 }

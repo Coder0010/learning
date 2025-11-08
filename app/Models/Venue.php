@@ -19,6 +19,7 @@ class Venue extends Model
         'name',
         'city',
         'country',
+        'region',
         'postal_code',
     ];
 
@@ -38,4 +39,7 @@ class Venue extends Model
     {
         return $this->hasMany(Conference::class);
     }
+
+
+
 }

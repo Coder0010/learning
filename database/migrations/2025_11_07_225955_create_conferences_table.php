@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('conferences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('is_published')->default(false);
             $table->string('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');

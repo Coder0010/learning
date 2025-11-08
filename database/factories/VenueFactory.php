@@ -24,6 +24,7 @@ class VenueFactory extends Factory
             'name' => fake()->name(),
             'city' => fake()->city(),
             'country' => fake()->country(),
+            'region' => fake()->word(),
             'postal_code' => fake()->postcode(),
         ];
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Speaker extends Model
 {
@@ -20,6 +21,8 @@ class Speaker extends Model
         'email',
         'bio',
         'twitter_handle',
+        'qualifications',
+        'avatar',
     ];
 
     /**
@@ -31,6 +34,7 @@ class Speaker extends Model
     {
         return [
             'id' => 'integer',
+            'qualifications' => 'array'
         ];
     }
 
@@ -38,4 +42,10 @@ class Speaker extends Model
     {
         return $this->belongsToMany(Conference::class);
     }
+
+    public function talks(): HasMany
+    {
+        return $this->hasMany(Talk::class);
+    }
+
 }
