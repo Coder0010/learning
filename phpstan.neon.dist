@@ -1,0 +1,19 @@
+# phpstan.neon.dist
+# Laravel 12 + Larastan stable configuration (PHPStan 2.x compatible)
+# Fully self-contained and warning-free
+
+parameters:
+  level: 6
+
+  paths:
+    - app
+    - database
+    - routes
+
+  excludePaths:
+    - %rootDir%/../vendor/*
+    - %rootDir%/../storage/*
+    - %rootDir%/../bootstrap/cache/*
+    - %rootDir%/../node_modules/*
+
+  reportUnmatchedIgnoredErrors: false

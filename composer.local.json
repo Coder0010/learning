@@ -1,0 +1,114 @@
+{
+    "name": "mkamelmasoud/composer.local",
+    "description": "Custom dev scripts for my Laravel project",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "mkamelmasoud/starter-core-kit": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../starter-core-kit",
+            "options": {
+                "symlink": true
+            },
+            "canonical": true
+        }
+    ],
+    "scripts": {
+        "switch": [
+            "switch-php 8.3",
+            "switch-node 20"
+        ],
+        "clear-cache-composer-npm": [
+            "composer clear-cache",
+            "npm cache clean --force"
+        ],
+        "fetch:composer": [
+            "php -r \"echo '\\033[32m>>> Using COMPOSER='.(getenv('COMPOSER') ?: 'composer.json').'\\033[0m'.PHP_EOL;\"",
+            "php -r \"putenv('COMPOSER=composer.json'); passthru('composer install');\""
+        ],
+        "local": [
+            "@clear-cache-composer-npm",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan key:generate --ansi"
+        ],
+        "fresh:project": [
+            "echo '🚀 Full Project Reset Started'",
+            "@fresh:backend",
+            "@fresh:data",
+            "@fresh:ide-helper",
+            "@fresh:frontend",
+            "echo '🎉 Full project reset complete!'"
+        ],
+        "fresh:backend": [
+            "echo '🧹 Refreshing Backend Environment'",
+            "@switch",
+            "rm -rf vendor/ composer.lock",
+            "composer install",
+            "composer dump-autoload -o",
+            "@fetch:composer",
+            "echo '✅ Backend refresh complete!'"
+        ],
+        "fresh:data": [
+            "echo '🗄️  Resetting Database'",
+            "@fresh:redis",
+            "@switch",
+            "@php artisan db:wipe",
+            "@php artisan migrate --seed",
+            "echo '✅ Database reset complete!'"
+        ],
+        "fresh:queue": [
+            "echo '🔄 Resetting Queue System'",
+            "@php artisan queue:flush",
+            "@php artisan queue:clear",
+            "@php artisan queue:restart",
+            "echo '✅ Queue system reset complete!'"
+        ],
+        "fresh:redis": [
+            "echo '🔄 Resetting Redis'",
+            "redis-cli -n 5 FLUSHDB",
+            "echo '✅ Redis reset complete!'"
+        ],
+        "fresh:frontend": [
+            "echo '🎨 Refreshing Frontend Environment'",
+            "@switch",
+            "rm -rf node_modules/",
+            "npm install",
+            "npm run build",
+            "echo '✅ Frontend refresh complete!'"
+        ],
+        "test": [
+            "echo '📊 Running Code Quality'",
+            "@switch",
+            "./vendor/bin/pint",
+            "./vendor/bin/phpstan clear-result-cache --configuration=phpstan.neon.dist",
+            "./vendor/bin/phpstan --configuration=phpstan.neon.dist --memory-limit=2G",
+            "echo '✅ All checks completed!'"
+        ],
+        "fresh:ide-helper": [
+            "@switch",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:models",
+            "@php artisan ide-helper:meta"
+        ]
+    },
+    "autoload": {
+        "psr-4": {}
+    },
+    "autoload-dev": {
+        "psr-4": {}
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
+            "wikimedia/composer-merge-plugin": true
+        }
+    }
+}
