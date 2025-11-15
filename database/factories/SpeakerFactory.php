@@ -21,10 +21,12 @@ class SpeakerFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => 'Speacker-'.fake()->name(),
             'email' => fake()->safeEmail(),
             'bio' => fake()->text(),
             'twitter_handle' => fake()->word(),
+            'qualifications' => $this->faker->randomElements(array_keys(Speaker::QUALIFICATIONS), 2),
+            'avatar' => null
         ];
     }
 }

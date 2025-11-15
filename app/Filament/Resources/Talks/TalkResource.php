@@ -16,11 +16,17 @@ use Filament\Tables\Table;
 
 class TalkResource extends Resource
 {
+    protected static ?int $navigationSort = 3;
     protected static ?string $model = Talk::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
+
+    public static function canGloballySearch(): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -26,7 +26,7 @@ class ListConferences extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()->slideOver()->after(callback: function () {
+            CreateAction::make()->after(callback: function () {
                 Notification::make()->success()->title('Conference Created')->send();
             }),
         ];

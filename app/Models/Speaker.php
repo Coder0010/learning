@@ -25,6 +25,19 @@ class Speaker extends Model
         'avatar',
     ];
 
+    const QUALIFICATIONS = [
+        'business-leader' => 'Business Leader',
+        'charisma' => 'Charismatic Speaker',
+        'first-time' => 'First Time Speaker',
+        'hometown-hero' => 'Hometown Hero',
+        'humanitarian' => 'Works in Humanitarian Field',
+        'laracasts-contributor' => 'Laracasts Contributor',
+        'twitter-influencer' => 'Large Twitter Following',
+        'youtube-influencer' => 'Large YouTube Following',
+        'open-source' => 'Open Source Creator / Maintainer',
+        'unique-perspective' => 'Unique Perspective'
+    ];
+
     /**
      * Get the attributes that should be cast.
      *

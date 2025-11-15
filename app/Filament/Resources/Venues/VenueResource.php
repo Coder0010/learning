@@ -16,11 +16,18 @@ use Filament\Tables\Table;
 
 class VenueResource extends Resource
 {
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $model = Venue::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function canGloballySearch(): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {

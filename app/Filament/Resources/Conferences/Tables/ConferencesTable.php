@@ -60,7 +60,7 @@ class ConferencesTable
                     ->multiple()
             ])
             ->recordActions([
-                EditAction::make()->slideOver(),
+                EditAction::make(),
                 DeleteAction::make(),
             ])
             ->toolbarActions([

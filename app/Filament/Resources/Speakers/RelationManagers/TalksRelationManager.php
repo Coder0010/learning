@@ -38,7 +38,7 @@ class TalksRelationManager extends RelationManager
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->headerActions([
-                CreateAction::make()->slideOver(),
+                CreateAction::make(),
             ]);
     }
 }

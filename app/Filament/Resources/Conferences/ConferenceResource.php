@@ -16,11 +16,18 @@ use Filament\Tables\Table;
 
 class ConferenceResource extends Resource
 {
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $model = Conference::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function canGloballySearch(): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {

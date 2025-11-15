@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Speakers\Pages;
 
 use App\Filament\Resources\Speakers\SpeakerResource;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
@@ -14,6 +15,7 @@ class ViewSpeaker extends ViewRecord
     {
         return [
             EditAction::make(),
+            DeleteAction::make(),
         ];
     }
 }
